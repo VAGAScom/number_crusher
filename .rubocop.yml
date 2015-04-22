@@ -1,0 +1,6 @@
+AllCops:
+  Exclude:
+    - Guardfile
+    - bin/*
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
