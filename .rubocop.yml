@@ -2,5 +2,13 @@ AllCops:
   Exclude:
     - Guardfile
     - bin/*
+  DisplayCopNames: true
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+Style/DotPosition:
+  EnforcedStyle: trailing
+
+Style/MultilineOperationIndentation:
+  EnforcedStyle: aligned

@@ -4,15 +4,16 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "number_crusher/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "number_crusher"
-  spec.version       = NumberCrusher::VERSION
-  spec.authors       = ["Ronie Uliana"]
-  spec.email         = ["ronie.uliana@gmail.com"]
+  spec.name = "number_crusher"
+  spec.version = NumberCrusher::VERSION
+  spec.authors = ["Ronie Uliana"]
+  spec.email = ["ronie.uliana@gmail.com"]
 
-  spec.summary       = "Statistics for ruby. Torture number until they confess"
-  spec.description   = <<TEXT
+  spec.summary = "Statistics for ruby. Torture number until they confess"
+  spec.description = <<TEXT
 Statistical methods and functions for Ruby.
-A minor (and improving) collection of everything I need to crush numbers in my job.
+A minor (and improving) collection of everything I need
+to crush numbers in my job.
 Goals (in order):
 1 - be correct;
 2 - be concise;
@@ -22,15 +23,19 @@ NOT Goals:
 1 - be comprehensive;
 2 - be flexible.
 TEXT
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage = "TODO: Put your gem's website or public repo URL here."
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.files = `git ls-files -z`.
+    split("\x0").
+    reject { |f| f.match(%r{^(test|spec|features)/}) }
+
+  spec.bindir = "exe"
+  spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.9"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "guard-rspec"
-  spec.add_development_dependency "guard-rubocop"
+  spec.add_development_dependency "guard-rspec", "~> 4.5"
+  spec.add_development_dependency "guard-rubocop", "~> 1.2"
+  spec.add_development_dependency "pry", "~> 0.10"
 end
