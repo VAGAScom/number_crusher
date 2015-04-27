@@ -1,13 +1,11 @@
 module NumberCrusher
-  class Average
-    class << self
-      def calc(an_array)
-        an_array.reduce(0) { |a, b| a + b } / an_array.size.to_f
-      end
+  def Average(numbers) # :rubocop: all
+    numbers.reduce(0) { |a, e| a + e } / numbers.size.to_f
+  end
 
-      def to_proc
-        ->(a) { calc(a) }
-      end
+  class Average
+    def self.call(numbers)
+      Average(numbers)
     end
   end
 end
