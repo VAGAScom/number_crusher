@@ -41,14 +41,14 @@ describe ResamplingWithReplacement do
     end
 
     it "randomize numbers with replacement" do
-      samples = (1..100).map { ResamplingWithReplacement([1, 2, 3]).first }
+      samples = (1..200).map { ResamplingWithReplacement([1, 2, 3]).first }
       expect(samples).to be_randomized
     end
   end
 
   context "with more samples" do
     it "randomize numbers with replacement" do
-      samples = ResamplingWithReplacement([1, 2, 3], samples: 100)
+      samples = ResamplingWithReplacement([1, 2, 3], samples: 200)
       expect(samples).to be_randomized
     end
   end
