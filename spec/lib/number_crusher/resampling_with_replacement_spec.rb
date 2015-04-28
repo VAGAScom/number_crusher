@@ -1,6 +1,10 @@
 require "spec_helper"
 
 describe ResamplingWithReplacement do
+  it_behaves_like "a Functor"
+
+  let (:sample) { [1, 2, 3] }
+
   matcher :average_of_sums_between do |lower, upper|
     match do |actual|
       average_of_sums = actual.map { |v| v.reduce(0, :+) }.reduce(0, :+) / actual.size.to_f
@@ -8,7 +12,7 @@ describe ResamplingWithReplacement do
     end
   end
 
-  matcher :be_randomized do |expect|
+  matcher :be_randomized_with_replacement do |expect|
     match do |actual|
       expect(actual).to \
         all(have_size(3)) &
@@ -20,27 +24,24 @@ describe ResamplingWithReplacement do
     end
   end
 
-  it "returns empty if zero (or negative) resamplings" do
-    expect(ResamplingWithReplacement([1, 2, 3], samples: 0)).to eq []
-    expect(ResamplingWithReplacement([1, 2, 3], samples: -1)).to eq []
+  context "with zero resamplings" do
+    subject { ResamplingWithReplacement(sample, samples: 0) }
+    it { is_expected.to have(0).items }
   end
 
   context "with default parameter (1 resample)" do
-    subject { ResamplingWithReplacement([1, 2, 3]) }
-    it "returns ONE resampling" do
-      expect(subject.size).to eq 1
-    end
+    subject { ResamplingWithReplacement(sample) }
 
-    it "randomize numbers with replacement" do
-      samples = (1..200).map { ResamplingWithReplacement([1, 2, 3]).first }
-      expect(samples).to be_randomized
+    it { is_expected.to have(1).items }
+
+    it "should randomize  with replacement" do
+      samples = (1..200).map { subject.first }
+      expect(samples).to be_randomized_with_replacement
     end
   end
 
   context "with more samples" do
-    it "randomize numbers with replacement" do
-      samples = ResamplingWithReplacement([1, 2, 3], samples: 200)
-      expect(samples).to be_randomized
-    end
+    subject { ResamplingWithReplacement(sample, samples: 200) }
+    it { is_expected.to be_randomized_with_replacement }
   end
 end

@@ -1,6 +1,8 @@
 require "spec_helper"
 
 describe Quantile do
+  it_behaves_like "a Functor"
+
   it "returns empty if empty data" do
     expect(Quantile([], quant: 0.0)).to eq nil
   end

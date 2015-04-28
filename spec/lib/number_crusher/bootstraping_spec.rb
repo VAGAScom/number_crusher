@@ -1,32 +1,23 @@
 require "spec_helper"
 
 describe Bootstraping do
-  shared_examples "bootstraping" do
-    it "bootstraps an estimator" do
-      ones = subject.count(1)
-      twos = subject.count(2)
-      threes = subject.count(3)
-      expect(subject).to have_size(100)
-      expect(twos).to be > ones && be > threes
-    end
+  it_behaves_like "a Functor"
+
+  let(:empty_sample) { [] }
+  let(:median) { Quantile(quant: 0.5) }
+
+  context "with default sample size" do
+    subject { Bootstraping(empty_sample, function: median) }
+    it { is_expected.to have(1_000).items }
   end
 
-  matcher :bootstraps do |expected|
-    match do |actual|
-      expect(actual).to \
-        have_size(100) &&
-        satisfy { |a| a.count(2) > a.count(3) }
-    end
+  context "with 100 as sample size" do
+    subject { Bootstraping(empty_sample, function: median, samples: 100) }
+    it { is_expected.to have(100).items}
   end
 
-  subject { Bootstraping([1, 2, 3], function: Quantile(quant: 0.5), samples: 100) }
-
-  it "bootstraps an estimator" do
-    expect(subject).to bootstraps
-  end
-
-  context 'called by "call"' do
-    subject { Bootstraping.new(function: Quantile(quant: 0.5), samples: 100).call([1, 2, 3]) }
-    it_behaves_like "bootstraping"
+  context "median with sample [1, 2, 3]" do
+    subject { Bootstraping([1, 2, 3], function: median, samples: 100) }
+    it { is_expected.to have_more(2).than(1) & have_more(2).than(3) }
   end
 end
