@@ -7,32 +7,45 @@ describe Quantile do
     expect(Quantile([], quant: 0.0)).to eq nil
   end
 
-  it "returns average of quantile elements" do
-    expect(Quantile([2, 1], quant: 0.5)).to eq 1.5
-    expect(Quantile([2, 1, 4, 3], quant: 0.5)).to eq 2.5
-    expect(Quantile([2, 2, 1, 10], quant: 0.5)).to eq 2
-    expect(Quantile([1, 3, 2], quant: Rational(1, 3))).to eq 1.5
+  let(:median) { Quantile(sample, quant: 0.5) }
+  let(:first_quartile) { Quantile(sample, quant: 0.25) }
+  let(:third_quartile) { Quantile(sample, quant: 0.75) }
+  let(:zeroeth_quantile) { Quantile(sample, quant: 0.0) }
+  let(:hundredth_quantile) { Quantile(sample, quant: 1) }
+
+  context "over a 1 element sample" do
+    let(:sample) { [1] }
+    it { expect(median).to eq 1 }
+    it { expect(first_quartile).to eq 1 }
+    it { expect(third_quartile).to eq 1 }
+    it { expect(zeroeth_quantile).to eq 1 }
+    it { expect(hundredth_quantile).to eq 1 }
   end
 
-  it "returns quantile" do
-    expect(Quantile([1], quant: 0.5)).to eq 1
-    expect(Quantile([1], quant: 0.9)).to eq 1
-    expect(Quantile([1, 3, 2], quant: 0.5)).to eq 2
-    expect(Quantile([2, 2, 1, 10, 9], quant: 0.25)).to eq 2
-    expect(Quantile([2, 2, 1, 10, 9], quant: 0.75)).to eq 9
-    expect(Quantile([2, 2, 1, 10, 9], quant: 0.99)).to eq 10
-    expect(Quantile([2, 2, 1, 10, 9], quant: 0.001)).to eq 1
-    expect(Quantile([2, 2, 1, 10], quant: 0.4)).to eq 2
-    expect(Quantile([2, 2, 1, 10], quant: 0.2)).to eq 1
+  context "over a 100 ordered elements sample (1 to 100)" do
+    let(:sample) { (1..100).to_a }
+    it { expect(median).to eq 50.5 }
+    it { expect(first_quartile).to eq 25.5 }
+    it { expect(third_quartile).to eq 75.5 }
+    it { expect(zeroeth_quantile).to eq 1 }
+    it { expect(hundredth_quantile).to eq 100 }
   end
 
-  it "returns first element if quantile == 0.0" do
-    expect(Quantile([1], quant: 0.0)).to eq 1
-    expect(Quantile([3, 2, 4], quant: 0.0)).to eq 2
+  context "over a 1000 ordered elements sample (1 to 1000)" do
+    let(:sample) { (1..1000).to_a }
+    it { expect(median).to eq 500.5 }
+    it { expect(first_quartile).to eq 250.5 }
+    it { expect(third_quartile).to eq 750.5 }
+    it { expect(zeroeth_quantile).to eq 1 }
+    it { expect(hundredth_quantile).to eq 1000 }
   end
 
-  it "returns last element if quantile == 1.0" do
-    expect(Quantile([1], quant: 1.0)).to eq 1
-    expect(Quantile([3, 2, 4], quant: 1.0)).to eq 4
+  context "over a 99 ordered elements sample (1 to 99)" do
+    let(:sample) { (1..99).to_a }
+    it { expect(median).to eq 50 }
+    it { expect(first_quartile).to eq 25 }
+    it { expect(third_quartile).to eq 75 }
+    it { expect(zeroeth_quantile).to eq 1 }
+    it { expect(hundredth_quantile).to eq 99 }
   end
 end
