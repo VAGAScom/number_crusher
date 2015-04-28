@@ -1,7 +1,7 @@
 module NumberCrusher
   def ResamplingWithReplacement(numbers, samples: 1)
     return [] if samples <= 0
-    (1..samples).map { Array.new(numbers.size) { numbers.sample } }
+    (1..samples).lazy.map { Array.new(numbers.size) { numbers.sample } }
   end
 
   class ResamplingWithReplacement

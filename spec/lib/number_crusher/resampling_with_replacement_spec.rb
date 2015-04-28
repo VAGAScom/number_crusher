@@ -1,18 +1,9 @@
 require "spec_helper"
 
 describe ResamplingWithReplacement do
-  RSpec::Matchers.define_negated_matcher :an_array_excluding, :include
-  matcher :have_size do |expect_size|
-    match do |actual|
-      actual.size == expect_size
-    end
-  end
-
   matcher :average_of_sums_between do |lower, upper|
     match do |actual|
-      average_of_sums = actual.
-        map { |v| v.reduce(0) { |a, e| a + e } }.
-        reduce(0) { |a, e| a + e } / actual.size.to_f
+      average_of_sums = actual.map { |v| v.reduce(0, :+) }.reduce(0, :+) / actual.size.to_f
       (lower..upper).include?(average_of_sums)
     end
   end
