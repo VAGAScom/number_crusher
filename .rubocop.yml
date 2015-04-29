@@ -10,5 +10,18 @@ Style/StringLiterals:
 Style/DotPosition:
   EnforcedStyle: trailing
 
-Style/MultilineOperationIndentation:
-  EnforcedStyle: aligned
+#Style/MultilineOperationIndentation:
+#  EnforcedStyle: aligned
+
+# We are using a dirty trick in this
+# gem: methods as objects.
+#
+# It makes sense to ignore snake_case
+# in this specific situation (I hope)
+Style/MethodName:
+  Enabled: false
+
+# Temporarily disabled while we are
+# still under construction
+Style/Documentation:
+  Enabled: false

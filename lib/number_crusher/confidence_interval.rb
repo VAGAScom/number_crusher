@@ -6,7 +6,7 @@ module NumberCrusher
 
   class ConfidenceInterval
     PRECISION = 4
-    UNIT = 10 ** PRECISION
+    UNIT = 10**PRECISION
     def initialize(confidence: 0.95)
       conf = (confidence * UNIT).to_i
       lower_quant = (UNIT - conf) / 2

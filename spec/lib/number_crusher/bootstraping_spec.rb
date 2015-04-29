@@ -13,7 +13,7 @@ describe Bootstraping do
 
   context "with 100 as sample size" do
     subject { Bootstraping(empty_sample, function: median, samples: 100) }
-    it { is_expected.to have(100).items}
+    it { is_expected.to have(100).items }
   end
 
   context "median with sample [1, 2, 3]" do

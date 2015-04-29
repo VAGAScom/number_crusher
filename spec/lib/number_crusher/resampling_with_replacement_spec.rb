@@ -3,19 +3,19 @@ require "spec_helper"
 describe ResamplingWithReplacement do
   it_behaves_like "a Functor"
 
-  let (:sample) { [1, 2, 3] }
+  let(:sample) { [1, 2, 3] }
 
   matcher :average_of_sums_between do |lower, upper|
     match do |actual|
-      average_of_sums = actual.map { |v| v.reduce(0, :+) }.reduce(0, :+) / actual.size.to_f
+      sums = actual.map { |v| v.reduce(0, :+) }.reduce(0, :+)
+      average_of_sums = sums / actual.size.to_f
       (lower..upper).include?(average_of_sums)
     end
   end
 
-  matcher :be_randomized_with_replacement do |expect|
+  matcher :be_randomized_with_replacement do
     match do |actual|
-      expect(actual).to \
-        all(have_size(3)) &
+      expect(actual).to all(have_size(3)) &
         include([1, 2, 3]) &
         include(an_array_excluding(3)) &
         include(an_array_excluding(2)) &

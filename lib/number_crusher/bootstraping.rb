@@ -10,7 +10,8 @@ module NumberCrusher
     end
 
     def call(numbers)
-      ResamplingWithReplacement(numbers, samples: @samples).map { |numbers| @function.call(numbers) }
+      ResamplingWithReplacement(numbers, samples: @samples).
+        map { |n| @function.call(n) }
     end
   end
 end

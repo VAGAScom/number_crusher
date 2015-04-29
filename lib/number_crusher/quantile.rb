@@ -6,7 +6,9 @@ module NumberCrusher
 
   class Quantile
     def initialize(quant:)
-      fail %(Expect quant: between 0.0 and 1.0 (inclusive), got "#{quant}") unless (0.0..1.0).include?(quant)
+      unless (0.0..1.0).include?(quant)
+        fail %(Expect quant: between 0.0 and 1.0 (inclusive), got "#{quant}")
+      end
       @quant = quant
     end
 
@@ -16,12 +18,18 @@ module NumberCrusher
       return sorted.first if @quant == 0
       return sorted.last if @quant == 1
 
-      size = numbers.size
-      quantile_index = size * @quant
+      quantile(numbers)
+    end
+
+    private
+
+    def quantile(numbers)
+      quantile_index = numbers.size * @quant
+      index = quantile_index.ceil
       if quantile_index == quantile_index.to_int
-        (sorted[quantile_index.ceil - 1] + sorted[quantile_index.ceil]) / 2.0
+        (numbers[index - 1] + numbers[index]) / 2.0
       else
-        sorted[quantile_index.ceil - 1]
+        numbers[index - 1]
       end
     end
   end

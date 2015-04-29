@@ -19,7 +19,7 @@ RSpec::Matchers.matcher :have do |expected|
   chain :item do
   end
   description do
-    "have #{expected} #{expected == 1 ? "item" : "items" }"
+    "have #{expected} #{expected == 1 ? 'item' : 'items' }"
   end
 end
 
