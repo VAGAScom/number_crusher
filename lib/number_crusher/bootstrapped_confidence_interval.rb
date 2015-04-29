@@ -1,13 +1,16 @@
 module NumberCrusher
-  def BootstrappedConfidenceInterval(numbers = nil, confidence: 0.95)
-    function = BootstrappedConfidenceInterval.new(confidence: confidence)
+  def BootstrappedConfidenceInterval(numbers = nil, **options)
+    function = BootstrappedConfidenceInterval.new(**options)
     numbers ? function.call(numbers) : function
   end
 
   class BootstrappedConfidenceInterval
     PRECISION = 4
     UNIT = 10**PRECISION
-    def initialize(confidence: 0.95)
+    def initialize(function:, confidence: 0.95, samples: 1000)
+      @function = function
+      @samples = samples
+
       conf = (confidence * UNIT).to_i
       lower_quant = (UNIT - conf) / 2
       @lower_quantile = lower_quant / UNIT.to_f
@@ -15,8 +18,9 @@ module NumberCrusher
     end
 
     def call(numbers)
-      [Quantile(numbers, quant: @lower_quantile),
-       Quantile(numbers, quant: @upper_quantile)]
+      boot = Bootstrapping(numbers, function: @function, samples: @samples)
+      [Quantile(boot, quant: @lower_quantile),
+       Quantile(boot, quant: @upper_quantile)]
     end
   end
 end

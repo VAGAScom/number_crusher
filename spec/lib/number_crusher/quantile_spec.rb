@@ -18,6 +18,11 @@ describe Quantile do
     it { expect(median).to eq 2 }
   end
 
+  context "with 1, 2, 3 as lazy sequence" do
+    let(:sample) { [1, 2, 3].each }
+    it { expect { median }.not_to raise_exception }
+  end
+
   context "over a 1 element sample" do
     let(:sample) { [1] }
     it { expect(median).to eq 1 }

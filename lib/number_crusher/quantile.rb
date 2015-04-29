@@ -5,6 +5,8 @@ module NumberCrusher
   end
 
   class Quantile
+    using EnumeratorExtension
+
     def initialize(quant:)
       unless (0.0..1.0).include?(quant)
         fail %(Expect quant: between 0.0 and 1.0 (inclusive), got "#{quant}")

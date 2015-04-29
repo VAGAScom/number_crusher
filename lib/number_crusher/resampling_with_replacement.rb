@@ -11,7 +11,8 @@ module NumberCrusher
 
     def call(numbers)
       return [] if @samples <= 0
-      (1..@samples).lazy.map { Array.new(numbers.size) { numbers.sample } }
+      n = numbers.to_a
+      (1..@samples).lazy.map { Array.new(n.size) { n.sample } }
     end
   end
 end
