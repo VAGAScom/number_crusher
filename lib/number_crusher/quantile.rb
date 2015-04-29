@@ -18,7 +18,7 @@ module NumberCrusher
       return sorted.first if @quant == 0
       return sorted.last if @quant == 1
 
-      quantile(numbers)
+      quantile(sorted)
     end
 
     private

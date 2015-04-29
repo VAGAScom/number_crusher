@@ -13,6 +13,11 @@ describe Quantile do
   let(:zeroeth_quantile) { Quantile(sample, quant: 0.0) }
   let(:hundredth_quantile) { Quantile(sample, quant: 1) }
 
+  context "with 1, 2, 3 scrambled" do
+    let(:sample) { [1, 3, 2] }
+    it { expect(median).to eq 2 }
+  end
+
   context "over a 1 element sample" do
     let(:sample) { [1] }
     it { expect(median).to eq 1 }
