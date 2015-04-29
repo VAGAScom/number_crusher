@@ -6,5 +6,5 @@ end
 require "number_crusher/average"
 require "number_crusher/quantile"
 require "number_crusher/resampling_with_replacement"
-require "number_crusher/bootstraping"
-require "number_crusher/confidence_interval"
+require "number_crusher/bootstrapping"
+require "number_crusher/bootstrapped_confidence_interval"

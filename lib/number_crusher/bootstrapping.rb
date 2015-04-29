@@ -1,10 +1,10 @@
 module NumberCrusher
-  def Bootstraping(numbers = nil, function:, samples: 1000)
-    function = Bootstraping.new(function: function, samples: samples)
+  def Bootstrapping(numbers = nil, function:, samples: 1000)
+    function = Bootstrapping.new(function: function, samples: samples)
     numbers ? function.call(numbers) : function
   end
 
-  class Bootstraping
+  class Bootstrapping
     def initialize(function:, samples: 1000)
       @function, @samples = function, samples
     end

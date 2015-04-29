@@ -1,10 +1,10 @@
 module NumberCrusher
-  def ConfidenceInterval(numbers = nil, confidence: 0.95)
-    function = ConfidenceInterval.new(confidence: confidence)
+  def BootstrappedConfidenceInterval(numbers = nil, confidence: 0.95)
+    function = BootstrappedConfidenceInterval.new(confidence: confidence)
     numbers ? function.call(numbers) : function
   end
 
-  class ConfidenceInterval
+  class BootstrappedConfidenceInterval
     PRECISION = 4
     UNIT = 10**PRECISION
     def initialize(confidence: 0.95)
