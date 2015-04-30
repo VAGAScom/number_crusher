@@ -21,7 +21,7 @@ module NumberCrusher
     private
 
     def kde(x, numbers)
-      (1.0 / numbers.size * @bandwidth) *
+      (1.0 / (numbers.size * @bandwidth)) *
         numbers.map { |xi| @function.call((x - xi) / @bandwidth) }.reduce(0, :+)
     end
   end
