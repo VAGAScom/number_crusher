@@ -1,6 +1,8 @@
 require "spec_helper"
 
 describe Epanechnikov do
+  it_behaves_like "a Functor"
+
   subject { Epanechnikov(n) }
 
   context "when n = 0" do
