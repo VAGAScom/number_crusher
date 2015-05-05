@@ -13,15 +13,8 @@ Gem::Specification.new do |spec|
   spec.description = <<TEXT
 Statistical methods and functions for Ruby.
 A minor (and improving) collection of everything I need
-to crush numbers in my job.
-Goals (in order):
-1 - be correct;
-2 - be concise;
-3 - low memory footprint as possible;
-4 - fast as possible.
-NOT Goals:
-1 - be comprehensive;
-2 - be flexible.
+to crush numbers in my job. (Currently, only nonparametric
+statistics)
 TEXT
   spec.homepage = "TODO: Put your gem's website or public repo URL here."
 
@@ -37,5 +30,6 @@ TEXT
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "guard-rspec", "~> 4.5"
   spec.add_development_dependency "guard-rubocop", "~> 1.2"
-  spec.add_development_dependency "pry", "~> 0.10"
+  spec.add_development_dependency "pry", "~> 0.9"
+  spec.add_development_dependency "travis", "~> 1.7.6"
 end

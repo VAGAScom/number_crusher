@@ -1,8 +1,6 @@
 # NumberCrusher
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/number_crusher`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Statistical methods and functions for Ruby. A minor (and improving) collection of everything I need to crush numbers in my job. (Currently, only nonparametric statistics).
 
 ## Installation
 
