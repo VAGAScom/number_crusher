@@ -16,7 +16,7 @@ describe KdeBandwidthFinder do
     end
   end
 
-  it "does stuff" do
+  it "find a bandwidth with no antimodes" do
     bandwidth = KdeBandwidthFinder(sample,
                                    function: function,
                                    xs: xs,
