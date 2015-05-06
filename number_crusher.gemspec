@@ -16,7 +16,7 @@ A minor (and improving) collection of everything I need
 to crush numbers in my job. (Currently, only nonparametric
 statistics)
 TEXT
-  spec.homepage = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage = "https://github.com/VAGAScom/number_crusher"
 
   spec.files = `git ls-files -z`.
     split("\x0").
