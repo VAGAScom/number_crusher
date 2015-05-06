@@ -31,5 +31,5 @@ TEXT
   spec.add_development_dependency "guard-rspec", "~> 4.5"
   spec.add_development_dependency "guard-rubocop", "~> 1.2"
   spec.add_development_dependency "pry", "~> 0.9"
-  spec.add_development_dependency "travis", "~> 1.7.6"
+  spec.add_development_dependency "travis", "~> 1.7", ">= 1.7.6"
 end
