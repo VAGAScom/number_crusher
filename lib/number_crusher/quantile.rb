@@ -1,22 +1,23 @@
 module NumberCrusher
-  def Quantile(numbers = nil, quant:)
-    function = Quantile.new(quant: quant)
+  def Quantile(numbers = nil, quant:, sorted: false)
+    function = Quantile.new(quant: quant, sorted: sorted)
     numbers ? function.call(numbers) : function
   end
 
   class Quantile
     using EnumeratorExtension
 
-    def initialize(quant:)
+    def initialize(quant:, sorted: false)
       unless (0.0..1.0).include?(quant)
         fail %(Expect quant: between 0.0 and 1.0 (inclusive), got "#{quant}")
       end
       @quant = quant
+      @sorted = sorted
     end
 
     def call(numbers)
       return nil if numbers.empty?
-      sorted = numbers.sort
+      sorted = @sorted ? numbers : numbers.sort
       return sorted.first if @quant == 0
       return sorted.last if @quant == 1
 
